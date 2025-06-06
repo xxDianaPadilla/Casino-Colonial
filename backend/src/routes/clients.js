@@ -1,29 +1,13 @@
-import {Schema, model} from "mongoose";
+import express from 'express';
+import clientsController from '../controllers/clientsController.js';
 
-const clientsSchema = new Schema({
-    fullName: {
-        type: String,
-        require: true
-    },
-    email: {
-        type: String,
-        require: true,
-    },
-    password: {
-        type: String,
-        require: true,
-    },
-    birthDate: {
-        type: Date,
-        require: true,
-    },
-    residenceCountry: {
-        type: String,
-        require: true,
-    },
-}, {
-    timestamps: true,
-    strict: false
-});
+const router = express.Router();
 
-export default model("Clients", clientsSchema);
+ router.route("/")
+ .get(clientsController.getClients);
+
+ router.route("/:id")
+ .put(clientsController.updateClients)
+ .delete(clientsController.deleteClients);
+
+ export default router;
