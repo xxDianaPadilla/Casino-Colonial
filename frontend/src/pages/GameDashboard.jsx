@@ -13,7 +13,7 @@ const GameDashboard = () => {
     const fetchGames = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:4000/api/games');
+            const response = await fetch('https://casino-colonial.onrender.com/api/games');
 
             if (!response.ok) {
                 throw new Error('Error al cargar los juegos');
@@ -36,7 +36,7 @@ const GameDashboard = () => {
     const handleAddGame = async (gameData) => {
         try {
             if (editingGame) {
-                const response = await fetch(`http://localhost:4000/api/games/${editingGame._id}`, {
+                const response = await fetch(`https://casino-colonial.onrender.com/api/games/${editingGame._id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const GameDashboard = () => {
                 alert(result.message || 'Juego actualizado correctamente');
                 setEditingGame(null);
             } else {
-                const response = await fetch('http://localhost:4000/api/games', {
+                const response = await fetch('https://casino-colonial.onrender.com/api/games', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const GameDashboard = () => {
     const handleDeleteGame = async (gameId) => {
         if (window.confirm('¿Estás seguro de que quieres eliminar este juego?')) {
             try {
-                const response = await fetch(`http://localhost:4000/api/games/${gameId}`, {
+                const response = await fetch(`https://casino-colonial.onrender.com/api/games/${gameId}`, {
                     method: 'DELETE',
                 });
 
@@ -213,7 +213,6 @@ const GameDashboard = () => {
                     )}
                 </div>
 
-                {/* Form Modal */}
                 <GameForm
                     isOpen={isFormOpen}
                     onClose={handleCloseForm}

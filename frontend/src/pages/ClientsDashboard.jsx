@@ -15,7 +15,7 @@ const ClientsDashboard = () => {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await fetch('http://localhost:4000/api/clients');
+                const response = await fetch('https://casino-colonial.onrender.com/api/clients');
                 if (!response.ok) {
                     throw new Error('Error al obtener los clientes');
                 }
@@ -35,7 +35,7 @@ const ClientsDashboard = () => {
     const handleSaveClient = async (clientData) => {
         try {
             if (editingClient) {
-                const response = await fetch(`http://localhost:4000/api/clients/${editingClient._id}`, {
+                const response = await fetch(`https://casino-colonial.onrender.com/api/clients/${editingClient._id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(clientData)
@@ -51,7 +51,7 @@ const ClientsDashboard = () => {
                         : client
                 ));
             } else {
-                const response = await fetch('http://localhost:4000/api/registerClients', {
+                const response = await fetch('https://casino-colonial.onrender.com/api/registerClients', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(clientData)
@@ -63,7 +63,7 @@ const ClientsDashboard = () => {
 
                 const result = await response.json();
 
-                const clientsResponse = await fetch('http://localhost:4000/api/clients');
+                const clientsResponse = await fetch('https://casino-colonial.onrender.com/api/clients');
                 if (clientsResponse.ok) {
                     const updatedClients = await clientsResponse.json();
                     setClients(updatedClients);
@@ -86,7 +86,7 @@ const ClientsDashboard = () => {
     const handleDeleteClient = async (clientId) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
             try {
-                const response = await fetch(`http://localhost:4000/api/clients/${clientId}`, {
+                const response = await fetch(`https://casino-colonial.onrender.com/api/clients/${clientId}`, {
                     method: 'DELETE'
                 });
 
