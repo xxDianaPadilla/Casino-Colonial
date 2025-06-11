@@ -1,6 +1,24 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+
+    const location = useLocation();
+
+    const isActive = (path) => {
+        if (path === "/" || path === "/home") {
+            return location.pathname === "/" || location.pathname === "/home";
+        }
+        return location.pathname === path;
+    };
+
+    const getLinkClasses = (path) => {
+        const baseClasses = "transition-colors font-semibold px-3 py-2 rounded-md";
+        if (isActive(path)) {
+            return `${baseClasses} text-orange-400 bg-green-800 shadow-inner`;
+        }
+        return `${baseClasses} text-white hover:text-orange-400 hover:bg-green-800`;
+    };
 
     return (
         <header className="bg-gradient-to-r from-green-600 to-green-700 shadow-2xl">
@@ -15,10 +33,25 @@ const Header = () => {
                             <h2 className="text-2xl font-bold text-orange-400 tracking-wide">COLONIAL</h2>
                         </div>
                     </div>
-                    <nav className="hidden md:flex space-x-8">
-                        <a href="#" className="text-white hover:text-orange-400 transition-colors font-semibold">Inicio</a>
-                        <a href="#" className="text-white hover:text-orange-400 transition-colors font-semibold">Juegos</a>
-                        <a href="#" className="text-white hover:text-orange-400 transition-colors font-semibold">Clientes</a>
+                    <nav className="hidden md:flex space-x-4">
+                        <Link
+                            to="/"
+                            className={getLinkClasses("/")}
+                        >
+                            Inicio
+                        </Link>
+                        <Link
+                            to="/dashboard"
+                            className={getLinkClasses("/dashboard")}
+                        >
+                            Juegos
+                        </Link>
+                        <Link
+                            to="/clients"
+                            className={getLinkClasses("/clients")}
+                        >
+                            Clientes
+                        </Link>
                     </nav>
                 </div>
             </div>
